@@ -1,0 +1,21 @@
+read line to till \n character
+	count number of characters
+	  if space at beginning of line skip
+		skip other spaces between 
+		  the instruction if more than oneand number to input
+
+temp_str[16];
+temp_str[15] = '\0'
+
+if char_check == 1
+	if in_word == yes
+	  and ischar(str[num])
+
+if ischar(str[num])
+  temp_str = str[num]
+
+line counter
+	while read() > 0
+	  while buff[char_pos] 
+		if buff[char_pos] == \n
+		  l_count++

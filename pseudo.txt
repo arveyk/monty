@@ -1,0 +1,118 @@
+
+instruction_t structure has
+	opcode:	member to save the opcode to execute, helps determine 
+		which insruction to execute
+	f:	member, a function pointer- will be used to point to the 
+		required function to carry out the execution 
+		instruction
+stack_t has 
+	n: 	the number to save
+	prev:	pointer to the previous member
+	next:	pointer to the next member
+
+/---- 	The Prog	----/
+
+int file_descriptor = open file_to_open
+
+array of instructions
+	instruction_t instr_array[] = {
+		{ "push", &push },
+		{ "pall", pall},
+		{ "pint", pint },
+		{ "pop", pop },
+		{ "swap", swap },
+		{ "add", add }
+		{ "nop", nop },
+		{ "sub", sub },
+		{ "div", div },
+		{ "mul", mul },
+		{ "mod", mod },
+		{ "pchar", pchar },
+		{ "pstr", pstr },
+		{ "rotl", rotl },
+		{ "rotr", rotr },
+		{ NULL, NULL }
+	};
+		OR
+
+	instr_array[0]->opcode = "push"
+	instr_array[0]->f = &push
+	instr_array[1]->opcode = "pall"
+	instr_array[1]->f = pall
+	instr_array[2]->opcode = "pint"
+	instr_array[2]->f = pint
+	instr_array[3]->opcode = "pop"
+	instr_array[3]->f = pop
+	instr_array[4]->opcode = "swap"
+	instr_array[4]->f = swap
+	instr_array[5]->opcode = "add"
+	instr_array[5]->f = add
+	instr_array[6]->opcode = "nop"
+	instr_array[6]->f = nop
+	instr_array[7]->opcode = "sub"
+	instr_array[7]->f = sub
+	instr_array[8]->opcode = "div"
+	instr_array[8]->f = div
+	instr_array[9]->opcode = "mul"
+	instr_array[9]->f = mul
+	instr_array[10]->opcode = "mod"
+	instr_array[10]->f = mod
+	instr_array[11->opcode = "pchar"
+	instr_array[11]->f = pchar
+	instr_array[12->opcode = "pstr"
+	instr_array[12]->f = pstr
+	instr_array[13]->opcode = "rotl"
+	instr_array[13]->f = rotl
+	instr_array[14]->opcode = "rotr"
+	instr_array[14]->f = rotr
+	instr_array[15]->opcode = "queue"
+	instr_array[15]->f = queue
+	instr_array[16]->opcode = "stack"
+	instr_array[16]->f = stack
+		
+--- Main --
+in while loop
+{
+	read from the input file
+		count number of lines line_count
+		malloc an array/vector line_count long
+		  (check for malloc return val)
+	for each line
+		allocate space from start of text to end of line
+		save the lines in a vector
+	
+}
+([ 
+    OR read a line at a time
+	malloc for that line
+	execute command (if it exists)
+	free the malloced space.
+	move to next line untill End of File is reached
+
+	close file
+])
+
+Close the file descriptor
+
+in execute loop
+	go through instruction line by line
+		vector[0]... 
+		.
+		.
+		.
+		vector[n]...
+	    if the instruction exists
+		execute(func_ptr, line_number)
+	    else
+		free allocated space
+		exit with error message
+	
+Finally free the malloc-ed memory
+	using a loop free the vector/array
+
+
+
+--- Execute Function ---
+		
+--- Function Template---
+  create space for the new member(if task is addition) using malloc  
