@@ -3,6 +3,8 @@
 
 #include <stdlib.h>
 #include <unistd.h>
+#include <stdio.h>
+#include <string.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or a queque)
@@ -35,21 +37,26 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-/**
- * struct commands - words with opcode and pointer to a function pointer
- * @
- * @
- *
- * Description: 
- */
-
 char **strtow(char *);
+int exec_c(char **str, unsigned int line);
 
-typedef struct commands
-{
+void add_opc(stack_t **stack, unsigned int line);
+void sub_opc(stack_t **stack, unsigned int line);
+void mul_opc(stack_t **stack, unsigned int line);
+void div_opc(stack_t **stack, unsigned int line);
 
-	char *name;
-	struct instruction_s;
-}
+void pint_opc(stack_t **stack, unsigned int line);
+void pop_opc(stack_t **stack, unsigned int line);
+void swap_opc(stack_t **stack, unsigned int line);
+void nop_opc(stack_t **stack, unsigned int line);
+
+void mod_opc(stack_t **stack, unsigned int line);
+void pchar_opc(stack_t **stack, unsigned int line);
+void pstr_opc(stack_t **stack, unsigned int line);
+
+void rotl_opc(stack_t **stack, unsigned int line);
+void rotr_opc(stack_t **stack, unsigned int line);
+void queue_opc(stack_t **stack, unsigned int line);
+void pall_opc(stack_t **stack, unsigned int line);
 
 #endif	/* MONTY_H */
