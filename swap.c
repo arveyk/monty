@@ -6,10 +6,27 @@
  *
  * Return: None
  */
-void swap(char *h)
+void swap(stack_t **h, unsigned int line)
 {
-	int temp = h->n;
+	stack_t *next;
+	int temp;
+	
+	if (*h == NULL)
+	{
+		dprintf(2, "L%d: can't swap, stack too short\n", line);
+		exit(EXIT_FAILURE);
+	}
+	if ((*h)->next == NULL)
+	{
+		dprintf(2, "L%d: can't swap, stack too short\n", line);
+		exit(EXIT_FAILURE);
+	}
+	temp = (*h)->n;
 
-	h->n = h->prev->n;
-	h->prev->n = temp;
+	next = (*h)->next;
+	if (next)
+	{
+		(*h)->n = next->n;
+		next->n = temp;
+	}
 }

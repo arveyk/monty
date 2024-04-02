@@ -6,10 +6,15 @@
  *
  * Return: we'll see
  */
-void sub_opc(stack_t *h)
+void sub_opc(stack_t **h, unsigned int line)
 {
-	trav = h->prev;
+	stack_t *trav = (*h)->prev;
 
-	trav->n = trav->n - h->n
-	pop(head);
+	if (trav == NULL)
+	{
+		dprintf(2, "L%d: can't sub, stack too short\n", line);
+		exit(EXIT_FAILURE);
+	}
+	trav->n = trav->n - (*h)->n;
+	pop_opc(h, line);
 }

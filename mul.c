@@ -6,15 +6,17 @@
  *
  * Return: second element which has the product
  */
-void mul_opc(char *h)
+void mul_opc(stack_t **h, unsigned int line)
 {
-	stack_t *trav = h;
-	stack_t *prod = NULL;
+	stack_t *trav = *h;
+	stack_t *prev = (*h)->prev;
 
-	if (trav == NULL)
-		return;
-
-	trav = trav->prev;
-	trav->n = trav->n * h->n;
-	prod = pop(h);
+	if (trav == NULL || prev == NULL)
+	{
+	
+		dprintf(2, "L%d: can't mul, stack too short\n", line);
+		exit(EXIT_FAILURE);
+	}
+	trav->n = trav->n * prev->n;
+	pop_opc(h, line);
 }

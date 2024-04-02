@@ -8,13 +8,14 @@
  */
 void add_opc(stack_t **head, unsigned int line)
 {
-	trav = (*head)->prev;
+	
+	stack_t *prev = (*head)->prev;
 	
 	if (prev == NULL)
 	{
-		perror("L%dcan't add, stack too short", line);
+		dprintf(2, "L%dcan't add, stack too short", line);
 		exit(EXIT_FAILURE);
 	}
 	prev->n = prev->n + (*head)->n;
-	pop(head);
+	pop_opc(head, line);
 }

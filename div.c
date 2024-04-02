@@ -14,9 +14,9 @@ void div_opc(stack_t **h, unsigned int line)
 		return;
 	if ((*h)->n == 0)
 	{
-		dprintf("L%d:division by zero\n", line);
+		dprintf(2, "L%u:division by zero\n", line);
 		exit(EXIT_SUCCESS);
 	}
-	prev->n = prev->n / (*h)->n;
-	pop(h);
+	trav->n = trav->n / (*h)->n;
+	pop_opc(h, line);
 }

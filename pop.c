@@ -6,16 +6,20 @@
  *
  * Return: NONE
  */
-void pop_opc(stack_t **h unsigned int line)
+void pop_opc(stack_t **h, unsigned int line)
 {
 
 	stack_t *second = NULL;
 
 	if (*h == NULL)
-		return;
-	stack_t *second = (*head)->prev;
-	printf("%d\n", (*head)->n);
-	free(head);
-	prev->next = NULL;
-	(*head) = prev;
+	{
+		perror("L %d: can't pop an empty stack", line);
+		exit(EXIT_FAILURE);
+	}
+	second = (*h)->next;
+	printf("%d\n", (*h)->n);
+	free(h);
+	if (second)
+		second->prev = NULL;
+	(*h) = second;
 }

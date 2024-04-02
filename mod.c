@@ -8,15 +8,22 @@
  */
 void mod_opc(stack_t **h, unsigned int line)
 {
-	stack_t *trav = (*h)->prev;
 	
-	if (trav == NULL)
+	stack_t *trav;
+
+	if (*h == NULL)
 		return;
+	trav = (*h)->prev;
+	if (trav == NULL)
+	{
+		dprintf(2, "L%d: can't mod, stack too short\n", line);
+		exit(EXIT_SUCCESS);
+	}
 	if ((*h)->n == 0)
 	{
-		dprintf("L%d:division by zero\n", line);
+		dprintf(2 ,"L%d:division by zero\n", line);
 		exit(EXIT_SUCCESS);
 	}
 	prev->n = prev->n % (*h)->n;
-	pop(h);
+	pop_opc(h, line);
 }
