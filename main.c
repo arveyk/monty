@@ -1,46 +1,65 @@
 #include "monty.h"
 #include <stdio.h>
 
-void free_stack(char **ptr)
+#define BUF_S 32
+
+void free_stack(char **ptr);
+
 /**
  * main - starting point
- * @ac: argument counter (from the terminal)
- * @av: argument vector
- * 
+ * @argc: argument counter (from the terminal)
+ * @argv: argument vector
+ *
  * Return: EXIT_SUCCESS
  */
-int main(int ac, char *av[])
+int main(int argc, char *argv[])
 {
 
+	instruction_t *comd;
+	int buff_chrs;
 	int fd = 0;
-	int lin_count = 1;
-	char *buffer[16];
+	unsigned int lin_count = 1;
+	char *buffer[BUF_S];
 	char **commands;
-	instruct_t comd;
-	stack_t *head = NULL;
+	char *bp;
 
-	if (ac != 3)
+	if (argc != 3)
 	{
 		perror(2, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-	fd = open(av[2], O_RDONLY);
+	fd = open(argv[2], O_RDONLY);
 	if (fd < 0)
 	{
-		perror("Error: Can't open file %s", av[2]);
+		dprintf("Error: Can't open file %s", argv[2]);
 		close(fd);
 		exit(EXIT_FAILURE);
 	}
-	buffer[15] = '\0';
+	buffer[BUF_S - 1] = '\0';
 
-	while (read(fd, buffer, 15) > 0)
+	buff_chrs = read(fd, buffer, BUF_S - 1);
+
+	while (buff_chrs > 0)
 	{
-		lin_count++;
-		commands = tokenize(buffer);
-		comd = exec_c(commands);
-		comd(&head,lin_count);
-		free_stack(commands);
+		bp = buffer;
+
+		commands = strtow(buffer);
+
+		/*
+		 * comd->f = exec_c(commands);
+		 * (comd->f)(&head, lin_count);
+		 */
+		exec_c(commands, lin_count);
+
+		buff_chrs = read(fd, buffer, BUF_S - 1);
+
+		bp += buff_chrs;
+/*
+ *		buff_chrs -= written_chrs;
 		free(head);
+ */
+		free_stack(commands);
+		lin_count++;
 	}
 	close(fd);
 	return (EXIT_SUCCESS);
@@ -55,14 +74,16 @@ int main(int ac, char *av[])
 void free_stack(char **ptr)
 {
 
-	stack_t *trac = *ptr;
+	stack_t *trav = *ptr;
 
 	if (*ptr == NULL)
 		return;
-	while (*trac != NULL)
+	while (*trav != NULL)
 	{
-		trac = trav->next;
+		trav = trav->next;
 		free(head);
-		head = trac;
-	}	
+		head = NULL;
+		head = trav;
+	}
+	trav = NULL;
 }
