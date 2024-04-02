@@ -17,7 +17,7 @@ int ischar(char cha)
 	return (0);
 }
 /**
- * strtow - splits a sting into words
+ * strtow - splits a string into words
  * @str: string to be split
  *
  * Return: pointer to array of strings, NULL if str == NULL or "", or failure
