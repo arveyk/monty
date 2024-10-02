@@ -1,10 +1,14 @@
 #ifndef MONTY_H
 #define MONTY_H
 
+/*
+ * #include <string.h>
+*/
 #include <stdlib.h>
-#include <unistd.h>
+#include <stddef.h>
 #include <stdio.h>
-#include <string.h>
+#include <unistd.h>
+#include <fcntl.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or a queque)
@@ -27,7 +31,7 @@ typedef struct stack_s
  * @opcode: the opcode
  * @f: function to handle the opcode
  *
- * Description: opcode and its function
+ * Description: opcode name (as a string)  and its function(function pointer)
  * for stack, queque, LIFO,FIFO
  */
 typedef struct instruction_s
